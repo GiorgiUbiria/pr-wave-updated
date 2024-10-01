@@ -1,0 +1,75 @@
+<div id="planet-container" class="absolute inset-0 z-0"></div>
+
+<script>
+  import * as THREE from 'three';
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new THREE.WebGLRenderer({ alpha: true });
+
+  const container = document.getElementById('planet-container');
+  if (container) {
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
+  }
+
+  const planetGeometry = new THREE.SphereGeometry(4, 64, 64);
+  const planetMaterial = new THREE.MeshPhongMaterial({
+    color: 0x1E90FF,
+    shininess: 30,
+    emissive: 0x0f4d7f,
+  });
+  const planet = new THREE.Mesh(planetGeometry, planetMaterial);
+
+  const waveGeometry = new THREE.SphereGeometry(4.05, 64, 64);
+  const waveTexture = new THREE.TextureLoader().load('/wave-texture.jpg');
+  const waveMaterial = new THREE.MeshPhongMaterial({
+    map: waveTexture,
+    transparent: true,
+    opacity: 0.3,
+    color: 0xFFFFFF
+  });
+  const waves = new THREE.Mesh(waveGeometry, waveMaterial);
+
+  const planetGroup = new THREE.Group();
+  planetGroup.add(planet);
+  planetGroup.add(waves);
+
+  const landMaterial = new THREE.MeshPhongMaterial({
+    color: 0x228B22,
+    shininess: 30,
+    transparent: true,
+    opacity: 0.6,
+    emissive: 0x114411,
+  });
+  const landGeometry = new THREE.SphereGeometry(4.02, 64, 64);
+  const land = new THREE.Mesh(landGeometry, landMaterial);
+  planetGroup.add(land);
+
+  scene.add(planetGroup);
+  camera.position.z = 14;
+
+  const ambientLight = new THREE.AmbientLight(0x404040, 2);
+  scene.add(ambientLight);
+
+  const pointLight = new THREE.PointLight(0xffffff, 2, 100);
+  pointLight.position.set(10, 10, 10);
+  scene.add(pointLight);
+
+  function animate() {
+    requestAnimationFrame(animate);
+    planetGroup.rotation.y += 0.009;
+    waves.rotation.y -= 0.004;
+    renderer.render(scene, camera);
+  }
+
+  animate();
+
+  window.addEventListener('resize', () => {
+    if (container) {
+      camera.aspect = container.clientWidth / container.clientHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(container.clientWidth, container.clientHeight);
+    }
+  });
+</script>
