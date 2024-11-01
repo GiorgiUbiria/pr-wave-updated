@@ -4,6 +4,9 @@ interface Props {
 }
 
 const { title } = Astro.props;
+
+import '@fontsource/twinkle-star';
+import '@fontsource-variable/syne';
 ---
 
 <!doctype html>
@@ -17,6 +20,17 @@ const { title } = Astro.props;
 		<title>{title}</title>
 	</head>
 	<body>
+		<nav class="sticky top-0 w-full z-50 bg-gradient-to-r from-[#0d1c9a] to-[#00a6ed]">
+			<div class="container mx-auto px-4 py-3 flex justify-between items-center">
+				<h3 class="text-2xl font-bold text-white">Pr Wave</h3>
+				<ul class="flex space-x-6">
+					<li><a href="/" class="text-lg text-white hover:text-gray-300">Home</a></li>
+					<li><a href="/about" class="text-lg text-white hover:text-gray-300">About</a></li>
+					<li><a href="/services" class="text-lg text-white hover:text-gray-300">Services</a></li>
+					<li><a href="/contact" class="text-lg text-white hover:text-gray-300">Contact</a></li>
+				</ul>
+			</div>
+		</nav>
 		<slot />
 	</body>
 </html>
@@ -38,7 +52,7 @@ const { title } = Astro.props;
 		box-sizing: border-box;
 	}
 	html {
-		font-family: system-ui, sans-serif;
+		font-family: 'Syne Variable', sans-serif;
 		background: #13151a;
 	}
 	code {

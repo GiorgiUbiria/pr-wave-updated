@@ -5,61 +5,88 @@
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ alpha: true });
+  const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
 
   const container = document.getElementById('planet-container');
   if (container) {
     renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
     container.appendChild(renderer.domElement);
   }
 
-  const planetGeometry = new THREE.SphereGeometry(4, 64, 64);
+  const planetGeometry = new THREE.SphereGeometry(6, 128, 128);
+  const earthTexture = new THREE.TextureLoader().load('/8k_earth_daymap.jpg');
+  const normalMap = new THREE.TextureLoader().load('/8k_earth_normal_map.jpg');
+  const specularMap = new THREE.TextureLoader().load('/8k_earth_specular_map.jpg');
   const planetMaterial = new THREE.MeshPhongMaterial({
-    color: 0x1E90FF,
-    shininess: 30,
-    emissive: 0x0f4d7f,
+    map: earthTexture,
+    normalMap: normalMap,
+    specularMap: specularMap,
+    shininess: 25,
+    bumpScale: 0.05,
   });
   const planet = new THREE.Mesh(planetGeometry, planetMaterial);
+  planet.castShadow = false;
+  planet.receiveShadow = false;
 
-  const waveGeometry = new THREE.SphereGeometry(4.05, 64, 64);
-  const waveTexture = new THREE.TextureLoader().load('/wave-texture.jpg');
-  const waveMaterial = new THREE.MeshPhongMaterial({
-    map: waveTexture,
-    transparent: true,
-    opacity: 0.3,
-    color: 0xFFFFFF
+  // Create a sun-like glow effect
+  const glowGeometry = new THREE.SphereGeometry(6.1, 32, 32);
+  const glowMaterial = new THREE.ShaderMaterial({
+    uniforms: {
+      sunPosition: { value: new THREE.Vector3(50, 0, 50) },
+      glowColor: { value: new THREE.Color(0xffdd99) },
+      planetPosition: { value: planet.position },
+      cameraPosition: { value: camera.position }
+    },
+    vertexShader: `
+      uniform vec3 sunPosition;
+      uniform vec3 planetPosition;
+      varying vec3 vNormal;
+      varying vec3 vSunDir;
+      void main() {
+        vNormal = normalize(normalMatrix * normal);
+        vSunDir = normalize(sunPosition - planetPosition);
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform vec3 glowColor;
+      uniform vec3 cameraPosition;
+      varying vec3 vNormal;
+      varying vec3 vSunDir;
+      void main() {
+        float intensity = pow(0.5 - dot(vNormal, vec3(0, 0, 1)), 2.0);
+        float sunEffect = max(dot(vNormal, vSunDir), 0.0);
+        vec3 glow = glowColor * intensity * (0.5 + 0.5 * sunEffect);
+        gl_FragColor = vec4(glow, 1.0);
+      }
+    `,
+    side: THREE.FrontSide,
+    blending: THREE.AdditiveBlending,
+    transparent: true
   });
-  const waves = new THREE.Mesh(waveGeometry, waveMaterial);
+
+  const glowMesh = new THREE.Mesh(glowGeometry, glowMaterial);
 
   const planetGroup = new THREE.Group();
   planetGroup.add(planet);
-  planetGroup.add(waves);
-
-  const landMaterial = new THREE.MeshPhongMaterial({
-    color: 0x228B22,
-    shininess: 30,
-    transparent: true,
-    opacity: 0.6,
-    emissive: 0x114411,
-  });
-  const landGeometry = new THREE.SphereGeometry(4.02, 64, 64);
-  const land = new THREE.Mesh(landGeometry, landMaterial);
-  planetGroup.add(land);
+  planetGroup.add(glowMesh);
 
   scene.add(planetGroup);
   camera.position.z = 14;
 
-  const ambientLight = new THREE.AmbientLight(0x404040, 2);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
   scene.add(ambientLight);
 
-  const pointLight = new THREE.PointLight(0xffffff, 2, 100);
-  pointLight.position.set(10, 10, 10);
-  scene.add(pointLight);
+  const sunLight = new THREE.PointLight(0xffffff, 1, 100);
+  sunLight.position.set(50, 0, 50);
+  scene.add(sunLight);
 
   function animate() {
     requestAnimationFrame(animate);
-    planetGroup.rotation.y += 0.009;
-    waves.rotation.y -= 0.004;
+    planetGroup.rotation.y += 0.003;
+    glowMaterial.uniforms.cameraPosition.value = camera.position;
     renderer.render(scene, camera);
   }
 
