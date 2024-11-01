@@ -1,0 +1,17 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ServicesSection from '../../components/services_section.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout title={t('title.services')}>
+  <section class="bg-gradient-to-r from-[#0d1c9a] to-[#00a6ed] text-white min-h-screen">
+    <div class="container mx-auto px-4 py-16">
+      <h1 class="text-4xl font-bold text-center mb-8">{t('services.title')}</h1>
+      <ServicesSection />
+    </div>
+  </section>
+</Layout> 

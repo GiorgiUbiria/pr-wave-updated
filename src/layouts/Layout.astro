@@ -1,16 +1,21 @@
 ---
+import '@fontsource/twinkle-star';
+import '@fontsource-variable/syne';
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+import { languages } from '../i18n/ui';
+
 interface Props {
 	title: string;
 }
 
 const { title } = Astro.props;
-
-import '@fontsource/twinkle-star';
-import '@fontsource-variable/syne';
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={lang}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content="Astro description" />
@@ -21,17 +26,58 @@ import '@fontsource-variable/syne';
 	</head>
 	<body>
 		<nav class="sticky top-0 w-full z-50 bg-gradient-to-r from-[#0d1c9a] to-[#00a6ed]">
-			<div class="container mx-auto px-4 py-3 flex justify-between items-center">
-				<h3 class="text-2xl font-bold text-white">Pr Wave</h3>
-				<ul class="flex space-x-6">
-					<li><a href="/" class="text-lg text-white hover:text-gray-300">Home</a></li>
-					<li><a href="/about" class="text-lg text-white hover:text-gray-300">About</a></li>
-					<li><a href="/services" class="text-lg text-white hover:text-gray-300">Services</a></li>
-					<li><a href="/contact" class="text-lg text-white hover:text-gray-300">Contact</a></li>
-				</ul>
+			<div class="container mx-auto px-4 py-3">
+				<div class="flex flex-col md:flex-row md:justify-between md:items-center">
+					<div class="flex justify-between items-center">
+						<h3 class="text-2xl font-bold text-white">Pr Wave</h3>
+						<button class="md:hidden text-white transition-transform duration-300" id="menu-toggle">
+							<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+							</svg>
+						</button>
+					</div>
+					<div class="hidden md:flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mt-4 md:mt-0 transition-all duration-300 ease-in-out max-h-0 md:max-h-screen overflow-hidden opacity-0 md:opacity-100" id="menu-items">
+						<ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6">
+							<li><a href={translatePath('/')} class="text-lg text-white hover:text-gray-300 block transition-colors duration-200">{t('nav.home')}</a></li>
+							<li><a href={translatePath('/about')} class="text-lg text-white hover:text-gray-300 block transition-colors duration-200">{t('nav.about')}</a></li>
+							<li><a href={translatePath('/services')} class="text-lg text-white hover:text-gray-300 block transition-colors duration-200">{t('nav.services')}</a></li>
+							<li><a href={translatePath('/contact')} class="text-lg text-white hover:text-gray-300 block transition-colors duration-200">{t('nav.contact')}</a></li>
+						</ul>
+						<select 
+							class="bg-transparent text-white border border-white rounded px-2 py-1 w-full md:w-auto transition-colors duration-200"
+							onchange="window.location.href=this.value"
+						>
+							{Object.entries(languages).map(([code, label]) => (
+								<option 
+									value={translatePath('/', code)} 
+									selected={lang === code}
+									class="text-black"
+								>
+									{label}
+								</option>
+							))}
+						</select>
+					</div>
+				</div>
 			</div>
 		</nav>
 		<slot />
+		<script>
+			const menuToggle = document.getElementById('menu-toggle');
+			const menuItems = document.getElementById('menu-items');
+
+			if (menuToggle && menuItems) {
+				menuToggle.addEventListener('click', () => {
+					menuItems.classList.toggle('hidden');
+					// Add a small delay to let the hidden class be removed first
+					setTimeout(() => {
+						menuItems.style.maxHeight = menuItems.classList.contains('hidden') ? '0' : menuItems.scrollHeight + 'px';
+						menuItems.style.opacity = menuItems.classList.contains('hidden') ? '0' : '1';
+						menuToggle.style.transform = menuItems.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(90deg)';
+					}, 10);
+				});
+			}
+		</script>
 	</body>
 </html>
 <style is:global>

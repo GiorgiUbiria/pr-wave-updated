@@ -1,8 +1,16 @@
+---
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+---
+
 <div class="footer__section py-8 text-center">
-    <p class="text-sm">&copy; 2024 Pr Wave. All rights reserved.</p>
+    <p class="text-sm">{t('footer.rights')}</p>
     <div class="mt-4">
-        <a href="/privacy-policy" class="text-sm mx-2 hover:underline">Privacy Policy</a>
-        <a href="/terms-of-service" class="text-sm mx-2 hover:underline">Terms of Service</a>
-        <a href="/contact" class="text-sm mx-2 hover:underline">Contact Us</a>
+        <a href={translatePath('/privacy-policy')} class="text-sm mx-2 hover:underline">{t('footer.privacy')}</a>
+        <a href={translatePath('/terms-of-service')} class="text-sm mx-2 hover:underline">{t('footer.terms')}</a>
+        <a href={translatePath('/contact')} class="text-sm mx-2 hover:underline">{t('footer.contact')}</a>
     </div>
 </div>

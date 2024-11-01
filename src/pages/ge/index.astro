@@ -1,0 +1,30 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TitleSection from '../../components/title-section.astro';
+import ContactSection from '../../components/contact-section.astro';
+import ServicesSection from '../../components/services_section.astro';
+import AboutSection from '../../components/about-section.astro';
+import FoundersSection from '../../components/founders-section.astro';
+import PartnersSection from '../../components/partners-section.astro';
+import FooterSection from '../../components/footer-section.astro';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+
+---
+
+<Layout title="Pr Wave">
+  <section class="bg-gradient-to-r from-[#0d1c9a] to-[#00a6ed] text-white">
+    <TitleSection />
+    <hr class="border-t border-white my-8 w-1/2 mx-auto">
+	<ContactSection />
+    <hr class="border-t border-white my-8 w-1/2 mx-auto">
+	<ServicesSection />
+    <hr class="border-t border-white my-8 w-1/2 mx-auto">
+	<AboutSection />
+    <hr class="border-t border-white my-8 w-1/2 mx-auto">
+	<FoundersSection />
+    <hr class="border-t border-white my-8 w-1/2 mx-auto">
+	<PartnersSection />
+    <hr class="border-t border-white my-8 w-1/2 mx-auto">
+	<FooterSection />
+  </section>
+</Layout>
