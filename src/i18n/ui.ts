@@ -13,6 +13,7 @@ export const ui = {
     'nav.about': 'About', 
     'nav.services': 'Services',
     'nav.contact': 'Contact',
+    'nav.title': 'PR Wave',
 
     // Page Titles
     'title.home': 'PR Wave - Digital PR Agency',
@@ -77,6 +78,20 @@ export const ui = {
     // Partners Section
     'partners.title': 'Our Partners',
 
+    // Privacy Policy
+    'privacy.last_updated': 'Last updated: [Date]',
+    'privacy.information_we_collect': 'Information we collect',
+    'privacy.information_we_collect_description': 'Description',
+    'privacy.how_we_use_your_information': 'How we use your information',
+    'privacy.how_we_use_your_information_description': 'Description',
+
+    // Terms of Service
+    'terms.last_updated': 'Last updated: [Date]',
+    'terms.agreement_to_terms': 'Agreement to Terms',
+    'terms.agreement_to_terms_description': 'Description',
+    'terms.use_license': 'Use License',
+    'terms.use_license_description': 'Description',
+
     // Footer
     'footer.rights': '© 2024 PR Wave. All rights reserved.',
     'footer.privacy': 'Privacy Policy',
@@ -89,7 +104,7 @@ export const ui = {
     'nav.about': 'ჩვენს შესახებ',
     'nav.services': 'სერვისები',
     'nav.contact': 'კონტაქტი',
-
+    'nav.title': 'PR Wave',
     // Page Titles
     'title.home': 'PR Wave - ციფრული PR სააგენტო',
     'title.about': 'ჩვენს შესახებ - PR Wave',
@@ -152,6 +167,20 @@ export const ui = {
 
     // Partners Section
     'partners.title': 'ჩვენი სასურველი',
+
+    // Privacy Policy
+    'privacy.last_updated': 'ვადა განახლებულია: [თარიღი]',
+    'privacy.information_we_collect': 'მიმდინარე სახელები',
+    'privacy.information_we_collect_description': 'აღწერა',
+    'privacy.how_we_use_your_information': 'როგორ იყენებთ თქვენს ინფორმაციას',
+    'privacy.how_we_use_your_information_description': 'აღწერა',
+
+    // Terms of Service
+    'terms.last_updated': 'ვადა განახლებულია: [თარიღი]',
+    'terms.agreement_to_terms': 'სასურველი',
+    'terms.agreement_to_terms_description': 'აღწერა',
+    'terms.use_license': 'სასურველი',
+    'terms.use_license_description': 'აღწერა',
 
     // Footer
     'footer.rights': '© 2024 PR Wave. ყველა უფლება დაცულია.',
