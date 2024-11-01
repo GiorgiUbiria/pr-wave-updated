@@ -15,6 +15,10 @@ export const ui = {
     'nav.contact': 'Contact',
     'nav.title': 'PR Wave',
 
+    // Head Content
+    'head.content': 'PR Wave',
+    'head.description': 'This is the main section of the page.',
+
     // Page Titles
     'title.home': 'PR Wave - Digital PR Agency',
     'title.about': 'About Us - PR Wave',
@@ -105,6 +109,11 @@ export const ui = {
     'nav.services': 'სერვისები',
     'nav.contact': 'კონტაქტი',
     'nav.title': 'PR Wave',
+
+    // Head Content
+    'head.content': 'პიარ ვეივი',
+    'head.description': 'მთავარი სექცია',
+
     // Page Titles
     'title.home': 'PR Wave - ციფრული PR სააგენტო',
     'title.about': 'ჩვენს შესახებ - PR Wave',
