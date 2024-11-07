@@ -6,6 +6,13 @@ import FounderCard from "../../components/FounderCard.astro";
 import Partners from "../../components/Partners.astro";
 import ServiceCard from "../../components/ServiceCard.astro";
 import CourseCard from "../../components/CourseCard.astro";
+
+import LeilaImage from "../../images/founder-1.jpg";
+import NinoImage from "../../images/founder-2.jpg";
+
+import SocialMediaMarketingImage from "../../images/courses/social-media-marketing.jpg";
+import ContentCreationImage from "../../images/courses/content-creation.jpg";
+import AnalyticsImage from "../../images/courses/analytics.jpg";
 ---
 
 <Layout title="Modern Company Website">
@@ -43,32 +50,32 @@ import CourseCard from "../../components/CourseCard.astro";
           <ServiceCard
             title="Social Media Management"
             description="Strategic planning and execution of social media campaigns to boost your brand's online presence."
-            icon="i-mdi-light-social-media"
+            icon="mdi:home"
           />
           <ServiceCard
             title="Content Creation"
             description="Engaging, platform-optimized content that resonates with your target audience."
-            icon="i-mdi-light-pencil"
+            icon="mdi:pencil"
           />
           <ServiceCard
             title="Brand Strategy"
             description="Comprehensive brand development and positioning to stand out in your market."
-            icon="i-mdi-light-strategy"
+            icon="mdi:strategy"
           />
           <ServiceCard
             title="Digital Marketing"
             description="Data-driven marketing campaigns across multiple digital channels."
-            icon="i-mdi-light-trending-up"
+            icon="mdi:trending-up"
           />
           <ServiceCard
             title="Analytics & Reporting"
             description="Detailed insights and analytics to measure and optimize your social media performance."
-            icon="i-mdi-light-chart-bar"
+            icon="mdi:chart-bar"
           />
           <ServiceCard
             title="Community Management"
             description="Active engagement and community building to foster brand loyalty."
-            icon="i-mdi-light-account-group"
+            icon="mdi:account-group"
           />
         </div>
       </div>
@@ -91,7 +98,7 @@ import CourseCard from "../../components/CourseCard.astro";
             duration="8 weeks"
             level="Beginner"
             price="$299"
-            image="/courses/social-media-marketing.jpg"
+            image={SocialMediaMarketingImage}
           />
           <CourseCard
             title="Content Creation Pro"
@@ -99,7 +106,7 @@ import CourseCard from "../../components/CourseCard.astro";
             duration="6 weeks"
             level="Intermediate"
             price="$249"
-            image="/courses/content-creation.jpg"
+            image={ContentCreationImage}
           />
           <CourseCard
             title="Advanced Analytics"
@@ -107,7 +114,7 @@ import CourseCard from "../../components/CourseCard.astro";
             duration="10 weeks"
             level="Advanced"
             price="$399"
-            image="/courses/analytics.jpg"
+            image={AnalyticsImage}
           />
         </div>
       </div>
@@ -123,13 +130,13 @@ import CourseCard from "../../components/CourseCard.astro";
           name="Leila Berdzenishvili"
           role="Founding Director"
           expertise="Social Media Marketing Expert"
-          imageUrl="/founders/leila.jpg"
+          imageUrl={LeilaImage}
         />
         <FounderCard
           name="Nino Chkheidze"
           role="Founding Director"
           expertise="Social Media Marketing Expert"
-          imageUrl="/founders/nino.jpg"
+          imageUrl={NinoImage}
         />
       </div>
     </section>
