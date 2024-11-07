@@ -1,114 +1,36 @@
 ---
-import '@fontsource/twinkle-star';
-import '@fontsource-variable/syne';
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '../i18n/utils';
-import { languages } from '../i18n/ui';
-
 interface Props {
-	title: string;
+  title: string;
 }
 
 const { title } = Astro.props;
-const lang = getLangFromUrl(Astro.url);
-const t = useTranslations(lang);
-const translatePath = useTranslatedPath(lang);
 ---
 
 <!doctype html>
-<html lang={lang}>
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content="Astro description" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<nav class="sticky top-0 w-full z-50 bg-gradient-to-r from-[#0d1c9a] to-[#00a6ed]">
-			<div class="container mx-auto px-4 py-3">
-				<div class="flex flex-col md:flex-row md:justify-between md:items-center">
-					<div class="flex justify-between items-center">
-						<h3 class="text-2xl font-bold text-white"><a href={translatePath('/')}>{t('nav.title')}</a></h3>
-						<button class="md:hidden text-white transition-transform duration-300" id="menu-toggle">
-							<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-							</svg>
-						</button>
-					</div>
-					<div class="hidden md:flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6 mt-4 md:mt-0 transition-all duration-300 ease-in-out max-h-0 md:max-h-screen overflow-hidden opacity-0 md:opacity-100" id="menu-items">
-						<ul class="flex flex-col md:flex-row space-y-2 md:space-y-0 md:space-x-6">
-							<li><a href={translatePath('/')} class="text-lg text-white hover:text-gray-300 block transition-colors duration-200">{t('nav.home')}</a></li>
-							<li><a href={translatePath('/about')} class="text-lg text-white hover:text-gray-300 block transition-colors duration-200">{t('nav.about')}</a></li>
-							<li><a href={translatePath('/services')} class="text-lg text-white hover:text-gray-300 block transition-colors duration-200">{t('nav.services')}</a></li>
-							<li><a href={translatePath('/contact')} class="text-lg text-white hover:text-gray-300 block transition-colors duration-200">{t('nav.contact')}</a></li>
-						</ul>
-						<select 
-							class="bg-transparent text-white border border-white rounded px-2 py-1 w-full md:w-auto transition-colors duration-200"
-							onchange="window.location.href=this.value"
-						>
-							{Object.entries(languages).map(([code, label]) => (
-								<option 
-									value={translatePath('/', code)} 
-									selected={lang === code}
-									class="text-black"
-								>
-									{label}
-								</option>
-							))}
-						</select>
-					</div>
-				</div>
-			</div>
-		</nav>
-		<slot />
-		<script>
-			const menuToggle = document.getElementById('menu-toggle');
-			const menuItems = document.getElementById('menu-items');
-
-			if (menuToggle && menuItems) {
-				menuToggle.addEventListener('click', () => {
-					menuItems.classList.toggle('hidden');
-					setTimeout(() => {
-						menuItems.style.maxHeight = menuItems.classList.contains('hidden') ? '0' : menuItems.scrollHeight + 'px';
-						menuItems.style.opacity = menuItems.classList.contains('hidden') ? '0' : '1';
-						menuToggle.style.transform = menuItems.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(90deg)';
-					}, 10);
-				});
-			}
-		</script>
-	</body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Modern company website" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  </head>
+  <body class="font-['Inter',sans-serif]">
+    <slot />
+  </body>
 </html>
+
 <style is:global>
-	:root {
-		--accent: 136, 58, 234;
-		--accent-light: 224, 204, 250;
-		--accent-dark: 49, 10, 101;
-		--accent-gradient: linear-gradient(
-			45deg,
-			rgb(var(--accent)),
-			rgb(var(--accent-light)) 30%,
-			white 60%
-		);
-	}
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
-	html {
-		font-family: 'Syne Variable', sans-serif;
-		background: #13151a;
-	}
-	code {
-		font-family:
-			Menlo,
-			Monaco,
-			Lucida Console,
-			Liberation Mono,
-			DejaVu Sans Mono,
-			Bitstream Vera Sans Mono,
-			Courier New,
-			monospace;
-	}
+  :root {
+    --accent: 136, 58, 234;
+    --accent-light: 224, 204, 250;
+    --accent-dark: 49, 10, 101;
+  }
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: #13151a;
+    scroll-behavior: smooth;
+  }
 </style>

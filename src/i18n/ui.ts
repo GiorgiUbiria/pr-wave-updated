@@ -10,8 +10,8 @@ export const ui = {
   en: {
     // Navigation
     'nav.home': 'Home',
-    'nav.about': 'About', 
-    'nav.services': 'Services',
+    'nav.about': 'About',
+    'nav.services': 'Services', 
     'nav.contact': 'Contact',
     'nav.title': 'PR Wave',
 
@@ -29,7 +29,7 @@ export const ui = {
 
     // About Section
     'about.title': 'About PR Wave',
-    'about.description': 'We are a digital PR agency focused on delivering exceptional results',
+    'about.description': 'Welcome to PR Wave, a dynamic social media marketing agency established in 2022, proudly serving the Georgian market. Founded by two visionary women - Nino Chkheidze, a renowned film director and businesswoman, and Leila Berdzenishvili-Kahveci, an experienced financial expert and digital marketer - PR Wave is a force of creativity and strategic thinking.\n\nAt PR Wave, we believe in the power of collaboration and innovation. Our unique approach combines our founders\' experience with fresh perspectives from our young, talented interns. This synergy allows us to deliver cutting-edge social media solutions that bring real results for our clients.\n\nWe offer a wide range of services tailored to each client\'s unique needs. Whether you\'re looking for a one-time technical analysis of your social media profiles, professional photo-video shooting, or targeted advertising campaigns, PR Wave has you covered. Our expertise extends to solving complex social media challenges, ensuring your brand\'s online presence is not just visible but influential.\n\nBeyond our services, we\'re passionate about education. Our signature course, SMM PLUS, is a comprehensive program designed for aspiring and current social media managers as well as business owners. Created by our expert mentors, this course offers a deep dive into both technical and theoretical aspects of social media marketing. Our students gain hands-on experience, learning everything from customer relations to content creation and even how to create compelling video scripts for their blogs.\n\nWe also host free online masterclasses every season, providing small business owners with valuable insights into effectively managing social media. These sessions are designed to give you the knowledge you need to run successful PR campaigns.\n\nAt PR Wave, we\'re more than just a marketing agency - we\'re a community. Through our social activities and constant engagement with students and clients, we\'re continuously exchanging ideas and experiences, fostering a culture of learning and growth.\n\nJoin us at PR Wave and ride the wave of success with innovative, effective social media strategies.',
     'about.students': 'Students',
     'about.students.description': 'Students whose names are not provided',
     'about.courses': 'Courses',
@@ -72,12 +72,12 @@ export const ui = {
 
     // Founders Section
     'founders.title': 'Our Founders',
-    'founders.name1': 'John Doe',
-    'founders.position1': 'Co-Founder & CEO',
-    'founders.description1': 'Visionary leader with 13+ years of experience in digital marketing and business strategy.',
-    'founders.name2': 'Jane Smith',
-    'founders.position2': 'Co-Founder & CTO',
-    'founders.description2': 'Tech innovator with a passion for creating cutting-edge solutions in the education sector.',
+    'founders.name1': 'Leila Berdzenishvili',
+    'founders.position1': 'Founding Director',
+    'founders.description1': 'Social Media Marketing Expert',
+    'founders.name2': 'Nino Chkheidze',
+    'founders.position2': 'Founding Director',
+    'founders.description2': 'Social Media Marketing Expert',
 
     // Partners Section
     'partners.title': 'Our Partners',
@@ -90,11 +90,17 @@ export const ui = {
     'privacy.how_we_use_your_information_description': 'Description',
 
     // Terms of Service
+    'terms.title': 'Terms and Conditions',
     'terms.last_updated': 'Last updated: [Date]',
     'terms.agreement_to_terms': 'Agreement to Terms',
     'terms.agreement_to_terms_description': 'Description',
     'terms.use_license': 'Use License',
     'terms.use_license_description': 'Description',
+    'terms.unilateral_changes': '1.1. Unilateral Changes to Terms and Conditions: The company reserves the right to unilaterally modify the terms and conditions, which will come into effect 24 hours after their publication on the website. In the event of a conflict between the provisions of these terms and a specific clause of the contract, the later published amendment shall prevail.',
+    'terms.use_of_services': '1.2. Use of Services: For the purposes of this clause, services refer to any services provided by the company, including but not limited to, paid and unpaid training services and social media marketing services. To provide these services, the company undertakes to:',
+    'terms.use_of_services_a': '(a) Publish video, textual, and visual materials prepared under unpaid services on the website;',
+    'terms.use_of_services_b': '(b) Share video, textual, and visual materials under paid services via email and/or other online platforms;',
+    'terms.use_of_services_c': '(c) Publish any visual, textual, or video content, including but not limited to graphic works, designs, photo materials, blog posts, animations on the website for the website users.',
 
     // Footer
     'footer.rights': '© 2024 PR Wave. All rights reserved.',
@@ -124,7 +130,7 @@ export const ui = {
 
     // About Section
     'about.title': 'PR Wave-ის შესახებ',
-    'about.description': 'ჩვენ ვართ ციფრული PR სააგენტო, ორიენტირებული გამორჩეულ შედეგებზე',
+    'about.description': 'კეთილი იყოს თქვენი მობრძანება PR Wave-ში, სოციალური მედიის მარკეტინგის დინამიურ სააგენტოში, რომელიც დაარსდა 2022 წელს, რომელიც ამაყად ემსახურება ქართულ ბაზარს. დაარსებული ორი ხედვადი ქალის - ნინო ჩხეიძის, ცნობილი კინორეჟისორისა და ბიზნესმენის და ლეილა ბერძენიშვილი-ქაჰვეჩის, გამოცდილი ფინანსური ექსპერტისა და ციფრული მარკეტინგის მიერ - PR Wave არის კრეატიულობისა და სტრატეგიული აზროვნების ძალა.\n\nPR Wave-ში ჩვენ გვჯერა თანამშრომლობისა და ინოვაციების ძალაში. ჩვენი უნიკალური მიდგომა აერთიანებს ჩვენი დამფუძნებლების გამოცდილებას ჩვენი ახალგაზრდა, ნიჭიერი სტაჟიორების ახალ პერსპექტივებს. ეს სინერგია საშუალებას გვაძლევს მივაწოდოთ უახლესი სოციალური მედიის გადაწყვეტილებები, რომლებიც რეალურ შედეგებს მოაქვს ჩვენი კლიენტებისთვის.\n\nჩვენ გთავაზობთ მომსახურების ფართო სპექტრს, რომელიც მორგებულია თითოეული კლიენტის უნიკალურ საჭიროებებზე. მიუხედავად იმისა, ეძებთ თქვენი სოციალური მედიის პროფილების ერთჯერად ტექნიკურ ანალიზს, პროფესიონალურ ფოტო-ვიდეო გადაღებას თუ მიზანმიმართულ სარეკლამო კამპანიას, PR Wave გაშუქებულია. ჩვენი ექსპერტიზა ვრცელდება სოციალური მედიის რთული გამოწვევების გადაჭრაზე, რაც უზრუნველყოფს თქვენი ბრენდის ონლაინ ყოფნას არა მხოლოდ თვალსაჩინო, არამედ გავლენიანიც.\n\nჩვენი სერვისების გარდა, ჩვენ გატაცებული ვართ განათლებაზე. ჩვენი ხელმოწერის კურსი, SMM PLUS, არის ყოვლისმომცველი პროგრამა, რომელიც შექმნილია სოციალური მედიის დამწყები და ამჟამინდელი მენეჯერებისთვის, ასევე ბიზნესის მფლობელებისთვის. ჩვენი ექსპერტი მენტორების მიერ შექმნილი ეს კურსი გვთავაზობს ღრმა ჩაძირვას სოციალური მედიის მარკეტინგის ტექნიკურ და თეორიულ ასპექტებში. ჩვენი სტუდენტები იძენენ პრაქტიკულ გამოცდილებას, სწავლობენ ყველაფერს მომხმარებელთან ურთიერთობიდან კონტენტის შექმნამდე და თუნდაც როგორ შექმნან დამაჯერებელი ვიდეო სცენარები თავიანთი ბლოგებისთვის.\n\nჩვენ ასევე ვმასპინძლობთ უფასო ონლაინ მასტერკლასებს ყოველ სეზონზე, რაც მცირე ბიზნესის მფლობელებს ვაძლევთ ღირებულ ინფორმაციას სოციალური მედიის ეფექტურად მართვის შესახებ. ეს სესიები შექმნილია იმისთვის, რომ მოგცეთ ცოდნა, რომელიც გჭირდებათ წარმატებული პიარ კამპანიების წარმართვისთვის.\n\nPR Wave-ში ჩვენ უფრო მეტი ვართ, ვიდრე უბრალოდ მარკეტინგული სააგენტო - ჩვენ ვართ საზოგადოება. ჩვენი სოციალური აქტივობებით და სტუდენტებთან და კლიენტებთან მუდმივი ჩართულობით, ჩვენ მუდმივად ვცვლით იდეებსა და გამოცდილებას, ვავითარებთ სწავლისა და ზრდის კულტურას.\n\nშემოგვიერთდით PR Wave-ში და იარეთ წარმატების ტალღაზე ინოვაციური, ეფექტური სოციალური მედიის სტრატეგიებით.',
     'about.students': 'სტუდენტი',
     'about.students.description': 'სტუდენტები რომელთა სახელები არ მოცემულია',
     'about.courses': 'კურსი',
@@ -157,7 +163,7 @@ export const ui = {
     'contact.form.course': 'რომელი კურსი არჩებთ?',
     'contact.form.selectCourse': 'აირჩიეთ კურსი',
     'contact.form.course1': 'კურსი 1',
-    'contact.form.course2': 'კურსი 2', 
+    'contact.form.course2': 'კურსი 2',
     'contact.form.course3': 'კურსი 3',
     'contact.form.socialMediaLink': 'სოციალური მედიის ლინკი',
     'contact.form.submit': 'შეტყობინების გაგზავნა',
@@ -166,30 +172,36 @@ export const ui = {
     'contact.phone': '+995 599 99 99 99',
 
     // Founders Section
-    'founders.title': 'ჩვენი ფუნდარები',
-    'founders.name1': 'სახელი',
-    'founders.position1': 'თანამდებობა',
-    'founders.description1': 'აღწერა',
-    'founders.name2': 'სახელი',
-    'founders.position2': 'თანამდებობა',
-    'founders.description2': 'აღწერა',
+    'founders.title': 'ჩვენი დამფუძნებლები',
+    'founders.name1': 'ლეილა ბერძენიშვილი',
+    'founders.position1': 'დამფუძნებელი დირექტორი',
+    'founders.description1': 'სოციალური მედია მარკეტინგის ექსპერტი',
+    'founders.name2': 'ნინო ჩხეიძე',
+    'founders.position2': 'დამფუძნებელი დირექტორი',
+    'founders.description2': 'სოციალური მედია მარკეტინგის ექსპერტი',
 
     // Partners Section
-    'partners.title': 'ჩვენი სასურველი',
+    'partners.title': 'ჩვენი პარტნიორები',
 
     // Privacy Policy
-    'privacy.last_updated': 'ვადა განახლებულია: [თარიღი]',
+    'privacy.last_updated': 'ბოლო განახლება: [თარიღი]',
     'privacy.information_we_collect': 'მიმდინარე სახელები',
     'privacy.information_we_collect_description': 'აღწერა',
     'privacy.how_we_use_your_information': 'როგორ იყენებთ თქვენს ინფორმაციას',
     'privacy.how_we_use_your_information_description': 'აღწერა',
 
     // Terms of Service
-    'terms.last_updated': 'ვადა განახლებულია: [თარიღი]',
+    'terms.title': 'წესები და პირობები',
+    'terms.last_updated': 'ბოლო განახლება: [თარიღი]',
     'terms.agreement_to_terms': 'სასურველი',
     'terms.agreement_to_terms_description': 'აღწერა',
     'terms.use_license': 'სასურველი',
     'terms.use_license_description': 'აღწერა',
+    'terms.unilateral_changes': '1.1. წესებისა და პირობების ცალმხრივი ცვლილება: კომპანია უფლებამოსილია ცალმხრივად შეცვალოს წესები და პიროებები, რომლებიც ძალაში შედის მათი ვებ-გვერდზე გამოქვეყნებიდან 24 (ოცდაოთხ) საათში. იმ შემთხვევაში, თუ წინამდებარე წესებსა და პირობებში მოცემული დანაწესი და ხელშეკრულების კონკრეტული პირობა ერთმანეთს ეწვევენ, უპირატესობა ენიჭება უფრო გვიან გამოქვეყნებულ ცვლილებას.',
+    'terms.use_of_services': '1.2. სერვისების გამოყენება: წინამდებარე მუხლის მიზნებისათვის სერვისი გულისხმობს კომპანიის მიერ გაწეულ ნებისმიერ მომსახურებას, მათ შორის და არა მხოლოდ, ანაზღაურებადი და არაანაზღაურებადი სატრენინგო მომსახურების გაწევა და სოციალური მედიის მარკეტინგული მომსახურების სერვისი. აღნიშნული სერვისების მიწოდების მიზნით კომპანია ახორციელებს, მათ შორის და არა მხოლოდ:',
+    'terms.use_of_services_a': '(ა) არაანაზღაურებადი მომსახურების ფარგლებში მომზადებული ვიდეო, ტექსტუალური და ვიზუალური მასალის განთავსებას ვებ-გვერდზე;',
+    'terms.use_of_services_b': '(ბ) ანაზღაურებადი მომსახურების ფარგლებში ვიდეო, ტექსტუალური და ვიზუალური მასალის გაზიარებას ელექტრონული ფოსტის ან/და სხვა ონლაინ პლატფორმის მეშვეობით;',
+    'terms.use_of_services_c': '(გ) ნებისმიერი შინაარსის ვიზუალური, ტექსტური ან/და ვიდეო მასალის, მათ შორის და არა მხოლოდ, ნებისმიერი გრაფიკული ნამუშევრის, დიზაინის, ფოტომასალის, ბლოგ პოსტის, ანიმაციის განთავსებაზე ვებ-გვერდზე, ვებ-გვერდის მომხმარებელი.',
 
     // Footer
     'footer.rights': '© 2024 PR Wave. ყველა უფლება დაცულია.',

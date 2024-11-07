@@ -1,0 +1,107 @@
+---
+
+---
+
+<div class="fixed inset-0 -z-10">
+  <!-- Waves -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="waves h-[40vh] opacity-10"></div>
+  </div>
+
+  <!-- Stars -->
+  <div class="stars opacity-90"></div>
+</div>
+
+<style>
+  .waves {
+    position: relative;
+    width: 100%;
+    margin-bottom: -7px;
+    min-height: 100px;
+    max-height: 150px;
+  }
+
+  .waves::before,
+  .waves::after {
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    top: 0;
+    left: 0;
+    transform-origin: 50% 50%;
+  }
+
+  .waves::before {
+    background: linear-gradient(90deg, #1e3a8a 0%, #0ea5e9 100%);
+    border-radius: 48%;
+    animation: waves 20s linear infinite;
+  }
+
+  .waves::after {
+    background: linear-gradient(90deg, #1e3a8a 0%, #0ea5e9 100%);
+    border-radius: 44%;
+    animation: waves 30s linear infinite;
+  }
+
+  @keyframes waves {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  .stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(
+      circle at 50% 50%,
+      rgba(30, 58, 138, 0.05) 0%,
+      rgba(14, 165, 233, 0.05) 100%
+    );
+    mix-blend-mode: screen;
+  }
+
+  .stars::before,
+  .stars::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    background-image: radial-gradient(
+        2px 2px at 20px 30px,
+        #ffffff10,
+        transparent
+      ),
+      radial-gradient(2px 2px at 40px 70px, #ffffff15, transparent),
+      radial-gradient(2px 2px at 50px 160px, #ffffff10, transparent),
+      radial-gradient(2px 2px at 90px 40px, #ffffff10, transparent),
+      radial-gradient(2px 2px at 130px 80px, #ffffff15, transparent),
+      radial-gradient(2px 2px at 160px 120px, #ffffff10, transparent);
+    background-repeat: repeat;
+    background-size: 200px 200px;
+    animation: stars 90s linear infinite;
+  }
+
+  .stars::after {
+    animation-delay: -45s;
+    animation-direction: reverse;
+  }
+
+  @keyframes stars {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+</style>
