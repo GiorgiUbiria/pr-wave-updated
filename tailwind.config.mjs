@@ -3,6 +3,7 @@ const { addIconSelectors } = require('@iconify/tailwind');
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
+  darkMode: 'class',
   theme: {
     extend: {
       backgroundImage: {
@@ -18,10 +19,15 @@ export default {
           '50%': { transform: 'translateY(-10px)' },
         },
       },
+      colors: {
+        background: {
+          DEFAULT: '#ffffff',
+          dark: '#13151a',
+        },
+      },
     },
   },
   plugins: [
-    // Iconify plugin
     addIconSelectors(['mdi', 'mdi-light']),
   ],
 }

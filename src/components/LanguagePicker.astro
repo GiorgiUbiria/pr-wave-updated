@@ -1,0 +1,37 @@
+---
+import { languages } from "../i18n/ui";
+import { getLangFromUrl, useTranslatedPath, getRouteFromUrl } from "../i18n/utils";
+
+const currentLang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(currentLang);
+const route = getRouteFromUrl(Astro.url);
+---
+
+<div class="relative group">
+  <button
+    class="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+    aria-label="Select language"
+  >
+    <span class="i-mdi-light-translate w-5 h-5"></span>
+    <span class="text-sm">{languages[currentLang]}</span>
+  </button>
+
+  <div
+    class="absolute right-0 mt-2 py-2 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
+  >
+    {
+      Object.entries(languages).map(([lang, label]) => (
+        <a
+          href={translatePath(route, lang)}
+          class={`block px-4 py-2 text-sm ${
+            currentLang === lang
+              ? "bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400"
+              : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+          }`}
+        >
+          {label}
+        </a>
+      ))
+    }
+  </div>
+</div>

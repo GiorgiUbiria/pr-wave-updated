@@ -1,17 +1,26 @@
 ---
+import ThemeSwitcher from "./ThemeSwitcher.astro";
+import LanguagePicker from "./LanguagePicker.astro";
+import MobileMenu from "./MobileMenu.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const basePath = lang === "ka" ? "" : `/${lang}`;
 ---
 
 <nav
-  class="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-blue-950/80 to-blue-900/80 backdrop-blur-lg border-b border-white/5"
+  class="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-gradient-to-r dark:from-blue-950/80 dark:to-blue-900/80 backdrop-blur-lg border-b border-gray-200 dark:border-white/5"
 >
   <div class="max-w-6xl mx-auto px-4">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
-      <a href="/" class="flex items-center space-x-2">
-        <span class="i-mdi-light-wave text-2xl text-blue-400"></span>
+      <a href={`${basePath}/`} class="flex items-center space-x-2">
+        <span class="i-mdi-light-wave text-2xl text-blue-600 dark:text-blue-400"
+        ></span>
         <span
-          class="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-blue-400"
+          class="font-bold text-xl bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-blue-800 dark:from-blue-200 dark:to-blue-400"
           >PR Wave</span
         >
       </a>
@@ -19,32 +28,98 @@
       <!-- Desktop Menu -->
       <div class="hidden md:flex items-center space-x-8">
         <a
-          href="#services"
-          class="text-blue-100 hover:text-white transition-colors">Services</a
+          href={`${basePath}/#services`}
+          class="text-gray-800 dark:text-blue-100 hover:text-blue-600 dark:hover:text-white transition-colors"
+          >{t("nav.services")}</a
         >
         <a
-          href="#about"
-          class="text-blue-100 hover:text-white transition-colors">About</a
-        >
-        <a href="#team" class="text-blue-100 hover:text-white transition-colors"
-          >Team</a
+          href={`${basePath}/#about`}
+          class="text-gray-800 dark:text-blue-100 hover:text-blue-600 dark:hover:text-white transition-colors"
+          >{t("nav.about")}</a
         >
         <a
-          href="#contact"
-          class="text-blue-100 hover:text-white transition-colors">Contact</a
+          href={`${basePath}/#team`}
+          class="text-gray-800 dark:text-blue-100 hover:text-blue-600 dark:hover:text-white transition-colors"
+          >{t("nav.team")}</a
         >
         <a
-          href="/get-started"
-          class="px-4 py-2 rounded-lg bg-blue-500 hover:bg-blue-400 text-white transition-all hover:scale-105"
+          href={`${basePath}/#contact`}
+          class="text-gray-800 dark:text-blue-100 hover:text-blue-600 dark:hover:text-white transition-colors"
+          >{t("nav.contact")}</a
         >
-          Get Started
+        <LanguagePicker />
+        <ThemeSwitcher />
+        <a
+          href={`${basePath}/get-started`}
+          class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white transition-all hover:scale-105"
+        >
+          {t("nav.getStarted")}
         </a>
       </div>
 
       <!-- Mobile Menu Button -->
-      <button class="md:hidden text-white" aria-label="Menu">
-        <span class="i-mdi-light-menu text-2xl"></span>
-      </button>
+      <div class="md:hidden flex items-center space-x-4">
+        <LanguagePicker />
+        <ThemeSwitcher />
+        <button
+          id="mobile-menu-button"
+          class="text-gray-800 dark:text-white p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg transition-colors"
+          aria-label="Toggle menu"
+        >
+          <div class="wave-menu">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </button>
+      </div>
     </div>
   </div>
+
+  <MobileMenu />
 </nav>
+
+<style>
+  .wave-menu {
+    width: 24px;
+    height: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  .wave-menu span {
+    display: block;
+    height: 2px;
+    background-color: currentColor;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .wave-menu span:nth-child(1) {
+    width: 50%;
+  }
+
+  .wave-menu span:nth-child(2) {
+    width: 100%;
+  }
+
+  .wave-menu span:nth-child(3) {
+    width: 75%;
+  }
+
+  .wave-menu.active span:nth-child(1) {
+    width: 100%;
+    transform: translateY(9px) rotate(45deg);
+  }
+
+  .wave-menu.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .wave-menu.active span:nth-child(3) {
+    width: 100%;
+    transform: translateY(-9px) rotate(-45deg);
+  }
+</style>

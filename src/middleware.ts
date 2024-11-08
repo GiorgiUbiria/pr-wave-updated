@@ -5,8 +5,9 @@ export const onRequest = defineMiddleware((context, next) => {
   const { url } = context;
   const [, lang] = url.pathname.split('/');
 
-  // If accessing root path, no redirect needed since default language is hidden
-  if (url.pathname === '/') {
+  // Always allow the root path - it will use defaultLang
+  if (url.pathname === '/' || url.pathname === '') {
+    context.locals.lang = defaultLang;
     return next();
   }
 
@@ -16,5 +17,13 @@ export const onRequest = defineMiddleware((context, next) => {
     return Response.redirect(new URL(newPath, url), 302);
   }
 
+  // Handle static assets and special paths
+  if (url.pathname.match(/\.(js|css|ico|jpg|png|svg|webp)$/) || url.pathname.startsWith('/_')) {
+    return next();
+  }
+
+  // Set the language in context
+  context.locals.lang = lang in ['ka', 'en'] ? lang : defaultLang;
+  
   return next();
 }); 
