@@ -1,37 +1,134 @@
 ---
-import { languages } from "../i18n/ui";
-import { getLangFromUrl, useTranslatedPath, getRouteFromUrl } from "../i18n/utils";
+import {
+  getLangFromUrl,
+  useTranslatedPath,
+  getRouteFromUrl,
+} from "../i18n/utils";
 
 const currentLang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(currentLang);
 const route = getRouteFromUrl(Astro.url);
+
+const flags = {
+  ka: "🇬🇪",
+  en: "🇺🇸",
+};
+
+// Pre-calculate both language paths
+const paths = {
+  ka: translatePath(route, 'ka'),
+  en: translatePath(route, 'en')
+};
 ---
 
-<div class="relative group">
-  <button
-    class="flex items-center space-x-1 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-    aria-label="Select language"
-  >
-    <span class="i-mdi-light-translate w-5 h-5"></span>
-    <span class="text-sm">{languages[currentLang]}</span>
-  </button>
+<button
+  id="language-toggle"
+  class="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+  aria-label="Switch language"
+  data-ka-path={paths.ka}
+  data-en-path={paths.en}
+>
+  <span class="text-lg leading-none">{flags[currentLang]}</span>
+</button>
 
-  <div
-    class="absolute right-0 mt-2 py-2 w-48 bg-white dark:bg-gray-900 rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50"
-  >
-    {
-      Object.entries(languages).map(([lang, label]) => (
-        <a
-          href={translatePath(route, lang)}
-          class={`block px-4 py-2 text-sm ${
-            currentLang === lang
-              ? "bg-blue-50 dark:bg-blue-900/50 text-blue-600 dark:text-blue-400"
-              : "text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
-          }`}
-        >
-          {label}
-        </a>
-      ))
+<script>
+  const languageToggle = document.getElementById("language-toggle");
+
+  if (languageToggle) {
+    languageToggle.addEventListener("click", () => {
+      const currentLang = document.documentElement.lang;
+      const newLang = currentLang === "ka" ? "en" : "ka";
+
+      // Create transition overlay
+      const overlay = document.createElement("div");
+      overlay.className =
+        "fixed inset-0 bg-white dark:bg-gray-900 z-50 transition-opacity duration-300 opacity-0";
+      document.body.appendChild(overlay);
+
+      // Store scroll position
+      const scrollPos = window.scrollY;
+      sessionStorage.setItem("scrollPos", scrollPos.toString());
+
+      // Trigger fade transition
+      requestAnimationFrame(() => {
+        overlay.style.opacity = "0.5";
+        
+        setTimeout(() => {
+          // Pre-load the font if switching to Georgian
+          if (newLang === 'ka') {
+            const fontLoader = new FontFace(
+              'ALK Rounded Mtav Med',
+              'url(/fonts/ALK-Rounded-Mtav-Med.woff2)',
+              { display: 'swap' }
+            );
+            
+            fontLoader.load().then(() => {
+              document.fonts.add(fontLoader);
+              navigateToNewLang();
+            }).catch(() => {
+              // Navigate anyway if font loading fails
+              navigateToNewLang();
+            });
+          } else {
+            navigateToNewLang();
+          }
+        }, 50);
+      });
+      function navigateToNewLang() {
+        // languageToggle is guaranteed to be non-null here since we're inside the if block
+        const newPath = languageToggle!.getAttribute(`data-${newLang}-path`);
+        if (newPath) {
+          window.location.href = newPath;
+        }
+      }
+    });
+  }
+
+  // Handle page load transitions
+  if (document.readyState === "complete") {
+    handlePageLoad();
+  } else {
+    document.addEventListener("DOMContentLoaded", handlePageLoad);
+  }
+
+  function handlePageLoad() {
+    const savedScrollPos = sessionStorage.getItem("scrollPos");
+    if (savedScrollPos) {
+      window.scrollTo(0, parseInt(savedScrollPos));
+      sessionStorage.removeItem("scrollPos");
     }
-  </div>
-</div>
+
+    const overlay = document.querySelector(".transition-overlay");
+    if (overlay) {
+      overlay.classList.add("opacity-0");
+      setTimeout(() => overlay.remove(), 300);
+    }
+  }
+</script>
+
+<style>
+  /* Smooth emoji rendering */
+  #language-toggle {
+    font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      sans-serif;
+  }
+
+  /* Prevent FOUC during language switch */
+  .transition-overlay {
+    pointer-events: none;
+  }
+
+  /* Smooth content transitions */
+  :global([data-astro-transition-scope]) {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>

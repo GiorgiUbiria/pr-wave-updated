@@ -4,11 +4,17 @@ import { Icon } from 'astro-icon/components';
 
 <button
   id="theme-toggle"
-  class="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+  class="p-2 rounded-lg bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
   aria-label="Toggle theme"
 >
-  <Icon name="mdi:white-balance-sunny" class="w-5 h-5 block dark:hidden" />
-  <Icon name="mdi:moon-and-stars" class="w-5 h-5 hidden dark:block" />
+  <Icon 
+    name="mdi:white-balance-sunny" 
+    class="w-5 h-5 block dark:hidden text-yellow-500" 
+  />
+  <Icon 
+    name="mdi:moon-and-stars" 
+    class="w-5 h-5 hidden dark:block text-blue-400" 
+  />
 </button>
 
 <script>
@@ -20,7 +26,6 @@ import { Icon } from 'astro-icon/components';
     localStorage.setItem('theme', isDark ? 'dark' : 'light');
   };
 
-  // Add event listener when the component mounts
   document
     .getElementById('theme-toggle')
     ?.addEventListener('click', handleToggleClick);

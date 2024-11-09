@@ -4,10 +4,11 @@ interface Props {
 }
 
 const { title } = Astro.props;
+const lang = Astro.url.pathname.split("/")[1] || 'ka';
 ---
 
 <!doctype html>
-<html lang={Astro.url.pathname.split("/")[1]}>
+<html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="description" content="Modern company website" />
@@ -16,6 +17,10 @@ const { title } = Astro.props;
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link 
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
@@ -40,22 +45,125 @@ const { title } = Astro.props;
       }
       window.localStorage.setItem("theme", theme);
     </script>
+    <link 
+      rel="preload" 
+      href="/fonts/ALK-Rounded-Mtav-Med.woff2" 
+      as="font" 
+      type="font/woff2" 
+      crossorigin
+    />
   </head>
   <body
-    class="font-['Inter',sans-serif] bg-white dark:bg-[#13151a] text-gray-900 dark:text-gray-100 transition-colors"
+    class:list={[
+      "font-primary bg-white dark:bg-[#13151a] text-gray-800 dark:text-gray-100 transition-colors duration-300",
+      { "font-georgian": lang === "ka" },
+      { "font-english": lang === "en" }
+    ]}
   >
-    <slot />
+    <div id="content" class="transition-opacity duration-300">
+      <slot />
+    </div>
   </body>
 </html>
 
 <style is:global>
-  :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
+  @font-face {
+    font-family: 'ALK Rounded Mtav Med';
+    src: local('ALK Rounded Mtav Med'), url('/fonts/ALK-Rounded-Mtav-Med.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
   }
+
+  :root {
+    --font-georgian: 'ALK Rounded Mtav Med', system-ui, -apple-system;
+    --font-english: 'Roboto', 'Inter', system-ui, -apple-system;
+  }
+
   html {
-    font-family: "Inter", system-ui, sans-serif;
+    font-family: system-ui, sans-serif;
     scroll-behavior: smooth;
+  }
+
+  .font-georgian {
+    font-family: var(--font-georgian);
+  }
+
+  .font-english {
+    font-family: var(--font-english);
+  }
+
+  /* Typography scale adjustments for Georgian */
+  .font-georgian h1 {
+    font-size: 2.5rem;
+    line-height: 1.3;
+  }
+
+  .font-georgian h2 {
+    font-size: 2rem;
+    line-height: 1.35;
+  }
+
+  .font-georgian p {
+    line-height: 1.6;
+  }
+
+  /* Typography scale for English */
+  .font-english h1 {
+    font-size: 2.25rem;
+    line-height: 1.2;
+  }
+
+  .font-english h2 {
+    font-size: 1.875rem;
+    line-height: 1.3;
+  }
+
+  .font-english p {
+    line-height: 1.5;
+  }
+
+  /* Prevent layout shifts during transitions */
+  body {
+    min-height: 100vh;
+    overflow-y: scroll;
+  }
+
+  /* Smooth transitions for all interactive elements */
+  a, button, input, select, textarea {
+    transition: all 0.3s ease;
+  }
+
+  /* Prevent FOUC */
+  .transition-opacity {
+    transition: opacity 0.3s ease;
+  }
+
+  /* Ensure content maintains position during transitions */
+  #content {
+    position: relative;
+    min-height: 100vh;
+  }
+
+  /* Enhanced text contrast */
+  .text-gray-600 {
+    @apply text-gray-700 dark:text-gray-300;
+  }
+
+  .text-gray-700 {
+    @apply text-gray-800 dark:text-gray-200;
+  }
+
+  /* Responsive typography */
+  @media (max-width: 768px) {
+    .font-georgian h1,
+    .font-english h1 {
+      font-size: 2rem;
+    }
+
+    .font-georgian h2,
+    .font-english h2 {
+      font-size: 1.75rem;
+    }
   }
 </style>
